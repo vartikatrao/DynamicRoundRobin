@@ -76,16 +76,19 @@ while True:
         with open(filename, 'r') as f:
             data = f.readlines()
 
-        for line in data[0:-1]:
-            values = line.strip().split()
-            if len(values) == 4:
-                name, arrival_time, burst_time, deadline = values
-                processes.append(Process(name, int(arrival_time), int(burst_time), int(deadline)))
-            
-            else:
-                pass
+        for line in data:
+                    # Skip empty or whitespace-only lines
+                    if not line.strip():
+                        continue
 
-        quantum = int(data[-1].strip()) 
+                    values = line.strip().split()
+                    if len(values) == 4:
+                        name, arrival_time, burst_time, deadline = values
+                        processes.append(Process(name, int(arrival_time), int(burst_time), int(deadline)))
+                    else:
+                        pass
+
+        
         n = len(processes) 
 
     elif choice == 0:

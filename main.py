@@ -9,9 +9,9 @@ from display import print_in_table, print_off_table, printGanttChart
 from DRR import DRR
 from RR import RR
 
-def printInfo(processes, ganttChart=None):
+def printInfo(processes, context_switch_count, ganttChart=None):
     print_in_table(processes)
-    print_off_table(processes)
+    print_off_table(processes,context_switch_count)
 
     if ganttChart:
         printGanttChart(ganttChart)
@@ -115,7 +115,7 @@ while True:
 
 
         # display information
-        printInfo(processes, rr.getGanttChart())
+        printInfo(processes,rr.getContextSwitchCount(), rr.getGanttChart())
         for process in processes:
                 process.reset()
 
@@ -124,7 +124,8 @@ while True:
         drr.run()
         processes=drr.getCompletedProcesses()
         print('-' * 35 + " DRR (Dynamic Round Robin) " + '-' * 35)
-        printInfo(processes, drr.getGanttChart())
+        printInfo(processes, drr.getContextSwitchCount(), drr.getGanttChart())
+
 
 
 

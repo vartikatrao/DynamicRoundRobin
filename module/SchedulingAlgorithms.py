@@ -11,6 +11,7 @@ class SchedulingAlgorithms:
     temp_process = None
     gantt_chart = []
     delay = 0
+    context_switch_count=-1
 
     def __init__(self, processes):
         self.processes = processes
@@ -22,6 +23,7 @@ class SchedulingAlgorithms:
         self.run_time = 0
         self.temp_process = None
         self.gantt_chart = []
+        self.context_switch_count=-1
         self.delay = 0
         self.processes.sort(key=lambda x: x.getArriveTime())
 
@@ -51,6 +53,10 @@ class SchedulingAlgorithms:
 
     def getGanttChart(self):
         return self.gantt_chart
+    
+    def getContextSwitchCount(self):
+        return self.context_switch_count
+    
     def setReadyQueues(self):
         # Add new processes to the ready queue
         for process in self.processes:
@@ -73,6 +79,7 @@ class SchedulingAlgorithms:
             return process
         
         return None
+    
     
     def setCompletedProcess(self, process):
 

@@ -4,7 +4,7 @@ from SchedulingAlgorithms import SchedulingAlgorithms
 # RR (Round Robin)
 class RR(SchedulingAlgorithms):
     quantum = 0
-
+    context_switch_count=-1
     def __init__(self, processes, quantum):
         super().__init__(processes)
         self.quantum = quantum
@@ -48,5 +48,6 @@ class RR(SchedulingAlgorithms):
                     continue
             
             process = self.getRunningProcess()
+            self.context_switch_count+=1
             self.execute(process)
 

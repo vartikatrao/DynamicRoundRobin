@@ -4,7 +4,7 @@ from SchedulingAlgorithms import SchedulingAlgorithms
 # Dynamic Round Robin
 class DRR(SchedulingAlgorithms):
     quantum = 0
-
+    context_switch_count=-1
     def __init__(self, processes):
         super().__init__(processes)
         self.ready_queues.sort(key=lambda x: (x.getPriority(), x.getDeadline()))
@@ -51,6 +51,7 @@ class DRR(SchedulingAlgorithms):
             self.ready_queues.sort(key=lambda x: (x.getPriority(), x.getDeadline()))
 
             process = self.getRunningProcess()
+            self.context_switch_count+=1 
             self.execute(process)
             
             for p in self.ready_queues: 

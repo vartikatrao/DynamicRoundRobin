@@ -17,7 +17,7 @@ def print_in_table(processes):
     table.addData(dictProcesses)
     table.display()
 
-def print_off_table(processes):
+def print_off_table(processes, context_switch_count):
     n = len(processes)
 
     total_time = 0
@@ -26,8 +26,8 @@ def print_off_table(processes):
             total_time = process.getFinishTime()
 
     #  troughput
+    total_time+=context_switch_count
     throughput = total_time / n
-
     # Calculate average metrics
     avg_start_time = sum(p.getStartTime() for p in processes) / n
     avg_turnaround_time = sum(p.getTurnaroundTime() for p in processes) / n
@@ -39,7 +39,11 @@ def print_off_table(processes):
     print("Average Turnaround Time   : {:.2f}".format(avg_turnaround_time))
     print("Average Waiting Time      : {:.2f}".format(avg_waiting_time))
     print("Average Response Time     : {:.2f}".format(avg_response_time))
-    print("Throughput                : {:.2f} second\n".format(throughput))
+    print("No. of Context Switches   : ",context_switch_count)
+    print("Assuming that each context switch takes 1s")
+    print("Total time taken          : {:.2f} seconds".format(total_time))
+    print()
+    
 
     # # gantt chart
     # gantt_chart()

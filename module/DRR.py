@@ -61,7 +61,9 @@ class DRR(SchedulingAlgorithms):
 
             # calculate new quantum value after every quantum of execution
             if (self.remaining_process):
-                self.quantum = (max(process.getBurstTimeRemaining() for process in self.ready_queues) + 
+                if (self.ready_queues):
+
+                    self.quantum = (max(process.getBurstTimeRemaining() for process in self.ready_queues) + 
                                     min(process.getBurstTimeRemaining() for process in self.ready_queues)) // 2
             
 

@@ -34,6 +34,7 @@ def print_off_table(processes, context_switch_count):
     avg_waiting_time = sum(p.getWaitingTime() for p in processes) / n
     avg_response_time = sum(p.getResponseTime() for p in processes) / n
     
+    avg_metrics=[avg_turnaround_time,avg_waiting_time,context_switch_count]
     # output
     print("Average Start Time        : {:.2f}".format(avg_start_time))
     print("Average Turnaround Time   : {:.2f}".format(avg_turnaround_time))
@@ -44,6 +45,7 @@ def print_off_table(processes, context_switch_count):
     print("Total time taken          : {:.2f} seconds".format(total_time))
     print()
     
+    return avg_metrics
 
     # # gantt chart
     # gantt_chart()

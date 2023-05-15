@@ -1,9 +1,16 @@
+import numpy as np
+import matplotlib.pyplot as plt
 import glob
 import time
 import sys
 sys.path.append("module")
 
-# import model
+barWidth = 0.25
+fig = plt.subplots(figsize =(12, 8))
+
+RR_list=[]
+DRR_list=[]
+ 
 from Process import Process
 from display import print_in_table, print_off_table, printGanttChart
 from DRR import DRR
@@ -11,11 +18,11 @@ from RR import RR
 
 def printInfo(processes, context_switch_count, ganttChart=None):
     print_in_table(processes)
-    print_off_table(processes,context_switch_count)
+    avg_metrics=print_off_table(processes,context_switch_count)
 
     if ganttChart:
         printGanttChart(ganttChart)
-
+    return avg_metrics
 # MAIN PROGRAM 
 txt_files = glob.glob("test-case/*.txt")
 
@@ -109,13 +116,16 @@ while True:
         
         if set_quantum:
             quantum = int(set_quantum)
+        else:
+             print("Quantum not set")
+             sys.exit(0)
         rr = RR(processes, quantum)
         rr.run()
         processes = rr.getCompletedProcesses()
 
 
         # display information
-        printInfo(processes,rr.getContextSwitchCount(), rr.getGanttChart())
+        RR_list=printInfo(processes,rr.getContextSwitchCount(), rr.getGanttChart())
         for process in processes:
                 process.reset()
 
@@ -124,7 +134,24 @@ while True:
         drr.run()
         processes=drr.getCompletedProcesses()
         print('-' * 35 + " DRR (Dynamic Round Robin) " + '-' * 35)
-        printInfo(processes, drr.getContextSwitchCount(), drr.getGanttChart())
+        DRR_list=printInfo(processes, drr.getContextSwitchCount(), drr.getGanttChart())
+
+        br1 = np.arange(len(RR_list))
+        br2 = [x + barWidth for x in br1]
+        br3 = [x + barWidth for x in br2]
+        # Make the plot
+        plt.bar(br1, RR_list, color ='c', width = barWidth,
+                edgecolor ='grey', label ='RR')
+        plt.bar(br2, DRR_list, color ='black', width = barWidth,
+                edgecolor ='grey', label ='DRR')
+        plt.xlabel('Metrics', fontweight ='bold', fontsize = 15)
+        plt.ylabel('Time', fontweight ='bold', fontsize = 15)
+        plt.xticks([r + barWidth for r in range(len(RR_list))],
+                ['Turn Around Time', 'Waiting Time', 'Context Switches'])
+        plt.legend()
+        plt.show()
+
+
 
 
 

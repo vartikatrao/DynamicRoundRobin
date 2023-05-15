@@ -43,7 +43,7 @@ class Process:
         self.__waiting_time = None
         self.__response_time = None
         self.__burst_time_remaining = self.__burst_time
-        self.__deadline=None
+        self.__deadline=self.__deadline
         self.__isQueued = False
         self.__isCompleted = False
 

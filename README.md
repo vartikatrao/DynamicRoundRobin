@@ -1,1 +1,3 @@
-# OS Project
+# Dynamic Round Robin 
+a new CPU scheduling algorithm 
+

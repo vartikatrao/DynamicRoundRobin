@@ -21,10 +21,16 @@ The CPU scheduling algorithm is a critical component of an operating system that
     d. If remaining burst < ½ quantum, complete and set state as EXIT. Else, move to ready queue.
     e. Decrement priority of other processes.
     f. Calculate new quantum based on max and min burst times.
+![image](https://github.com/vartikatrao/DynamicRoundRobin/assets/100116788/d2f2bed5-0680-4c3e-ade1-94e032889cfa)
 
 ## Results
 
 Our algorithm outperforms traditional Round Robin in turnaround time, waiting time, and throughput. It reduces context switches, executes tasks before deadlines, and prioritizes time-sensitive tasks. Incorporating Priority Scheduling and Dynamic Time Quantum calculation improves efficiency and resource utilization.
+<br> ![image](https://github.com/vartikatrao/DynamicRoundRobin/assets/100116788/59127475-350d-478f-a4f0-83d0ded5ad09)
+![image](https://github.com/vartikatrao/DynamicRoundRobin/assets/100116788/57af1f86-3280-48ca-857e-667f943236b0)
+![image](https://github.com/vartikatrao/DynamicRoundRobin/assets/100116788/d078e32e-ab0b-4a13-bd75-21eeaf34b67a)
+
+![image](https://github.com/vartikatrao/DynamicRoundRobin/assets/100116788/19f84912-d6de-44f2-a64b-8d11733499d0)
 
 ## Simulation
 
